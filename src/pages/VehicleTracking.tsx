@@ -23,7 +23,7 @@ const StatCard: React.FC<StatCardProps> = ({ icon, label, value, color }) => {
 
 const VehicleTracking: React.FC = () => {
   return (
-    <div className="bg-[#0f172a] p-6 rounded-lg text-white w-full max-w-5xl mx-auto">
+    <div className="bg-[#0f172a] rounded-lg text-white w-full">
       <h2 className="text-2xl font-bold mb-6">VEHICLE TRACKING</h2>
 
       {/* Top Stats */}
