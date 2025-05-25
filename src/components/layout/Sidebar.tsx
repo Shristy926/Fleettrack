@@ -1,36 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { sidebarItems } from '../../config/sidebarConfig';
 import { cn } from '../../utils/cn';
 import { Menu, LogOut, MapPin } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface SidebarProps {
-  activeRoute: string;
-  setActiveRoute: (route: string) => void;
   showHamburger?: boolean;
   isCollapsed: boolean;
   onToggle: () => void;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
-  activeRoute,
-  setActiveRoute,
+
   showHamburger = true,
   isCollapsed,
   onToggle,
 }) => {
+const location = useLocation();
+  const path = location.pathname?.split('/')[1] || 'dashboard'; // Default to 'dashboard' if no path
+
+   const [activeRoute, setActiveRoute] = useState(path);
+   const navigate = useNavigate();
+   const handleMenuClick = (route: string) => {
+    setActiveRoute(route);
+    if (isCollapsed) {
+      onToggle(); // Close sidebar if collapsed
+    }
+    navigate(`/${route}`);
+  };
   return (
     <aside
-      className={`h-screen bg-white fixed top-0 left-0 z-20 shadow-md border-r border-gray-200 transition-all duration-300 flex flex-col justify-between ${
+      className={`h-screen bg-white fixed top-0 left-0 z-20 shadow-md border-r border-gray-200 transition-all duration-300 flex flex-col justify-between overflow-auto ${
         isCollapsed ? 'w-20' : 'w-64'
       }`}
     >
       {/* Header */}
       <div>
-        <div className="flex items-center justify-between p-4 border-b border-gray-100">
+        <div className="flex items-center justify-between p-4 border-b border-gray-100 overflow-auto">
           <div className="flex items-center gap-2">
-            <div className="bg-indigo-100 text-indigo-600 p-2 rounded-full">
+            {!isCollapsed &&<div className="bg-indigo-100 text-indigo-600 p-2 rounded-full">
               <MapPin size={20} />
-            </div>
+            </div>}
             {!isCollapsed && (
               <span className="text-xl font-bold text-indigo-600">FleetTrack</span>
             )}
@@ -48,7 +58,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           {sidebarItems.map(({ label, route, icon: Icon }) => (
             <button
               key={route}
-              onClick={() => setActiveRoute(route)}
+              onClick={() => handleMenuClick(route)}
               className={cn(
                 'flex items-center p-3 rounded-md text-sm font-medium transition-all',
                 activeRoute === route

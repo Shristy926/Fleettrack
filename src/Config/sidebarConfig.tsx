@@ -9,10 +9,11 @@ export interface SidebarItem {
 
 export const sidebarItems: SidebarItem[] = [
   { label: 'Dashboard', route: 'dashboard', icon: LayoutDashboard },
-{ label: 'Vehicle Tracking', route: 'vehicles', icon: Truck },
+{ label: 'Vehicle Tracking', route: 'VehicleTracking', icon: Truck },
   { label: 'Alerts', route: 'alerts', icon: Bell },
   { label: 'Trip History', route: 'triphistory', icon: WatchIcon },
   { label: 'Settings', route: 'settings', icon: Settings },
+  
 ];
 
  
