@@ -1,7 +1,6 @@
 import React, { ReactNode, useState } from 'react';
 import Sidebar from '../layout/Sidebar';
 import Header from '../layout/Header';
-import DashboardPage from '../../pages/DashboardPage';
 
 interface LayoutProps {
   children: ReactNode;

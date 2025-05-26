@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { LogIn } from 'lucide-react';
-import { Card, CardContent } from '../components/ui/Card';
-import Button from '../components/ui/Button';
+import { Card, CardContent } from '../ui/Card';
+import Button from '../ui/Button';
 
 interface LoginPageProps {
   onLogin: () => void;
@@ -12,25 +13,33 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+
 
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
+  e.preventDefault();
+  setLoading(true);
+  setError(null);
 
-    try {
-      // Temporary validation
-      if (email === 'demo@example.com' && password === 'password') {
-        onLogin();
-      } else {
-        throw new Error('Invalid credentials. Use demo@example.com / password');
-      }
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred during login');
-    } finally {
-      setLoading(false);
+  try {
+    // Temporary validation
+    if (email === 'demo@example.com' && password === 'password') {
+      // Simulate setting token (optional)
+      localStorage.setItem("token", "demo-token");
+      
+      // Navigate to dashboard
+      navigate("/dashboard");
+    } else {
+      throw new Error('Invalid credentials. Use demo@example.com / password');
     }
-  };
+  } catch (err) {
+    setError(err instanceof Error ? err.message : 'An error occurred during login');
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-blue-600 flex items-center justify-center p-4">

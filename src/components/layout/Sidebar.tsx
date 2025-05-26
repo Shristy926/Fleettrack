@@ -36,7 +36,7 @@ const location = useLocation();
     >
       {/* Header */}
       <div>
-        <div className="flex items-center justify-between p-4 border-b border-gray-100 overflow-auto">
+        <div className="flex items-center justify-between p-4 border-b border-gray-100 ">
           <div className="flex items-center gap-2">
             {!isCollapsed &&<div className="bg-indigo-100 text-indigo-600 p-2 rounded-full">
               <MapPin size={20} />

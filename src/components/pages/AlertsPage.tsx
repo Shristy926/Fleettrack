@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { BellOff, Filter, Clock } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/Card';
-import Button from '../components/ui/Button';
-import Badge from '../components/ui/Badge';
-import { alerts } from '../data/mockData';
-import { Alert } from '../types';
+import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
+import Button from '../ui/Button';
+import Badge from '../ui/Badge';
+import { alerts } from '../../data/mockData';
+import { Alert } from '../../types';
 
 const AlertsPage: React.FC = () => {
   const [filter, setFilter] = useState<Alert['severity'] | 'all'>('all');

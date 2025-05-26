@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SettingPage= ()=> {
+const SettingsPage= ()=> {
   return (
     <div>
       Upcoming Page
@@ -8,4 +8,4 @@ const SettingPage= ()=> {
   )
 }
 
-export default SettingPage;
+export default SettingsPage;

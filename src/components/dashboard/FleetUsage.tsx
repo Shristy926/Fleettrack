@@ -1,90 +1,69 @@
-import React from 'react';
-import { Line } from 'react-chartjs-2';
+import React from "react";
 import {
-  Chart as ChartJS,
-  LineElement,
-  CategoryScale,
-  LinearScale,
-  PointElement,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
   Tooltip,
-  Filler,
-  Legend
-} from 'chart.js';
+  ResponsiveContainer,
+  CartesianGrid,
+} from "recharts";
 
-ChartJS.register(
-  LineElement,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  Tooltip,
-  Filler,
-  Legend
-);
+const data = [
+  { hour: 1, distance: 300 },
+  { hour: 2, distance: 280 },
+  { hour: 3, distance: 270 },
+  { hour: 4, distance: 290 },
+  { hour: 5, distance: 275 },
+  { hour: 6, distance: 260 },
+  { hour: 7, distance: 255 },
+  { hour: 8, distance: 240 },
+  { hour: 9, distance: 150 },
+  { hour: 10, distance: 130 },
+  { hour: 11, distance: 110 },
+  { hour: 12, distance: 100 },
+  { hour: 13, distance: 120 },
+  { hour: 14, distance: 115 },
+  { hour: 15, distance: 130 },
+  { hour: 16, distance: 100 },
+  { hour: 17, distance: 80 },
+];
 
-const FleetUsage = () => {
-  const data = {
-    labels: Array.from({ length: 17 }, (_, i) => `${i + 1}`),
-    datasets: [
-      {
-        label: 'Distance (km)',
-        data: [310, 330, 300, 290, 310, 300, 310, 280, 260, 200, 150, 120, 130, 170, 160, 140, 90],
-        fill: true,
-        backgroundColor: 'rgba(59, 130, 246, 0.2)',
-        borderColor: '#3b82f6',
-        pointBackgroundColor: '#3b82f6',
-        tension: 0.4,
-        pointRadius: 2,
-      },
-    ],
-  };
-
-  const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        display: false,
-      },
-    },
-    scales: {
-      y: {
-        beginAtZero: true,
-        ticks: {
-          font: { size: 9 },
-        },
-        title: {
-          display: true,
-          text: 'Distance (km)',
-          font: { size: 9 },
-        },
-      },
-      x: {
-        ticks: {
-          font: { size: 9 },
-        },
-        title: {
-          display: true,
-          text: 'Hours',
-          font: { size: 9 },
-        },
-      },
-    },
-  };
-
+const FleetUsage: React.FC = () => {
   return (
-    <div className="bg-white p-2 rounded-xl shadow-md w-full max-w-md h-[350px]">
-  <div className="flex justify-between items-start mb-2">
-    <h2 className="text-sm font-semibold text-gray-800">Fleet Usage</h2>
-    <div className="text-right text-[10px] text-gray-600 leading-tight">
-      <p>Total Usage: <span className="text-blue-600 font-medium">25,800 km</span></p>
-      <p>Avg/Vehicle: <span className="text-blue-600 font-medium">129 km</span></p>
-    </div>
-  </div>
-  <div className="h-[180px]">
-    <Line data={data} options={options} />
-  </div>
-</div>
+    <div className="bg-white rounded-lg shadow-md p-4 w-full max-w-md text-sm">
+      <h2 className="text-sm font-semibold mb-1">Fleet Usage</h2>
 
+      <div className="flex justify-between text-xs text-gray-600 mb-2">
+        <p>
+          Total Fleet Usage{" "}
+          <span className="text-blue-600 font-semibold">25800 km</span>
+        </p>
+        <p>
+          Avg. Distance / Vehicle{" "}
+          <span className="text-blue-600 font-semibold">129 km</span>
+        </p>
+      </div>
+
+      <div className="w-full h-48">
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart data={data}>
+            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+            <XAxis dataKey="hour" label={{ value: "Hours", position: "insideBottom", offset: -5 }} />
+            <YAxis label={{ value: "Distance (km)", angle: -90, position: "insideLeft", offset: 10 }} />
+            <Tooltip />
+            <Line
+              type="monotone"
+              dataKey="distance"
+              stroke="#007bff"
+              strokeWidth={2}
+              dot={{ fill: "white", stroke: "#007bff", strokeWidth: 2, r: 3 }}
+              activeDot={{ r: 5 }}
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
   );
 };
 
