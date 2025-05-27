@@ -42,65 +42,67 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
 
 
   return (
-    <div className="min-h-screen bg-blue-600 flex items-center justify-center p-4">
+    <div className= "min-h-screen min-w-screen bg-blue-600 items-center justify-center p-4" >
 
-      <Card className="w-full max-w-md shadow-xl border border-blue-100">
-        <CardContent className="p-8">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-blue-900 mt-4">Login</h1>
-          
-            <p className="text-xs text-blue-500 mt-2">
-              Use <strong>demo@example.com</strong> / <strong>password</strong> to login
-            </p>
-          </div>
+    <Card className="w-full max-w-md shadow-xl border border-blue-100" >
+      <CardContent className="p-8" >
+        <div className="text-center mb-8" >
+          <h1 className="text-3xl font-bold text-blue-900 mt-4" > Login </h1>
 
-          <form onSubmit={handleLogin} className="space-y-5">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                Email address
-              </label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-2 border border-blue-200 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                required
-              />
-            </div>
-
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                Password
-              </label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2 border border-blue-200 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                required
-              />
-            </div>
-
-            {error && (
-              <div className="bg-red-100 text-red-600 p-3 rounded-md text-sm border border-red-200">
-                {error}
+            < p className = "text-xs text-blue-500 mt-2" >
+                  Use  demo @example.com password  to login
+                </p>
               </div>
-            )}
 
-            <Button
+                < form onSubmit = { handleLogin } className = "space-y-5" >
+                  <div>
+                  <label htmlFor="email" className = "block text-sm font-medium text-gray-700 mb-1" >
+                    Email address
+                      </label>
+                      < input
+  id = "email"
+  type = "email"
+  value = { email }
+  onChange = {(e) => setEmail(e.target.value)}
+className = "w-full px-4 py-2 border border-blue-200 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+required
+  />
+  </div>
+
+  < div >
+  <label htmlFor="password" className = "block text-sm font-medium text-gray-700 mb-1" >
+    Password
+    </label>
+    < input
+id = "password"
+type = "password"
+value = { password }
+onChange = {(e) => setPassword(e.target.value)}
+className = "w-full px-4 py-2 border border-blue-200 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+required
+  />
+  </div>
+
+{
+  error && (
+    <div className="bg-red-100 text-red-600 p-3 rounded-md text-sm border border-red-200" >
+      { error }
+      </div>
+            )
+}
+
+<Button
               type="submit"
-              size="lg"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold"
-              isLoading={loading}
-            >
-              Sign in
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
-    </div>
+size = "lg"
+className = "w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold"
+isLoading = { loading }
+  >
+  Sign in
+  </Button>
+  </form>
+  </CardContent>
+  </Card>
+  </div>
   );
 };
 

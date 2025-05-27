@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom';
 import React, { ReactNode, useState } from 'react';
 import Sidebar from '../layout/Sidebar';
 import Header from '../layout/Header';
@@ -7,7 +8,9 @@ interface LayoutProps {
 }
 const Layout: React.FC<LayoutProps> = ({children}) => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
- 
+  
+  const location = useLocation()
+  console.log(location.pathname);
 
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
@@ -15,9 +18,12 @@ const Layout: React.FC<LayoutProps> = ({children}) => {
     setIsSidebarCollapsed(prev => !prev);
   };
 
+
+
   return (
     <div className="flex">
-      {/* Sidebar */}
+    {!location.pathname.includes('/login') ? <>
+     {/* Sidebar */}
       <Sidebar
        
         isCollapsed={isSidebarCollapsed}
@@ -39,6 +45,8 @@ const Layout: React.FC<LayoutProps> = ({children}) => {
           {/* You can render children components here */}
         </main>
       </div>
+   
+    </> : children }
     </div>
   );
 };
