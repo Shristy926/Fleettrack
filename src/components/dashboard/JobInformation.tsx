@@ -9,7 +9,7 @@ const JobInformation: React.FC = () => {
   const getPercentage = (count: number) => (count / total) * 100;
 
   return (
-    <div className="bg-white rounded-xl p-3 shadow-md w-[320px] text-sm">
+    <div className="bg-white rounded-xl p-3 shadow-md w-[360px] text-sm">
       <div className="flex justify-between items-start mb-2">
         <h2 className="font-semibold text-sm">Job Information</h2>
         <div className="text-right">

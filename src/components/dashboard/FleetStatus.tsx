@@ -11,7 +11,7 @@ const FleetStatus: React.FC = () => {
   ];
 
   return (
-    <div className="bg-white rounded-xl p-1 shadow-md h-80px">
+    <div className="bg-white rounded-xl p-1 shadow-md h-[290px]">
       <h2 className="text-lg font-semibold mb-4">Fleet Status</h2>
       <div className="flex items-center justify-between">
         <div className="relative w-50 h-50">

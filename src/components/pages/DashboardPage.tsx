@@ -5,6 +5,7 @@ import FleetUsage from "../dashboard/FleetUsage";
 import FleetIdle from "../dashboard/FleetIdle";
 import JobInformation from "../dashboard/JobInformation";
 import AlertCardGroups from "../dashboard/AlertCardGroups";
+import DashboardCards from "../dashboard/AlertCardGroups";
 // import VehicleStatus from "../components/dashboard/VehicleStatus";
 // import FleetFuel from "../components/dashboard/FleetFuel";
 // import AlertCardsGroup from "../components/dashboard/AlertCardGroups";
@@ -23,13 +24,15 @@ const DashboardPage: React.FC = () => {
   </div>
 
   <div className="w-full h-full">
-    <FleetIdle />
-  </div>
-
-  {/* Second Row: JobInformation full width across 3 columns */}
-  <div className="col-span-1 md:col-span-3 w-full h-full">
+  <FleetIdle />
+  <div className="mt-2">
     <JobInformation />
   </div>
+  <div className="p-6">
+      <DashboardCards />
+    </div>
+</div>
+
 </div>
 
 
