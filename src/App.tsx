@@ -1,64 +1,37 @@
-import React, { lazy, Suspense, useCallback } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
-import Layout from "./components/layout/Layout";
-import { useLocation } from "react-router-dom";
-import AlertsPage from "./pages/AlertsPage";
-import TripsPage from "./pages/TripsPage";
-import SettingPage from "./pages/SettingsPage";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
-//import Loader from "./components/Shared/Loader";
+// Import your layout and pages
+import Layout from './components/layout/Layout';
+import DashboardPage from './pages/DashboardPage';
+import VehicleTracking from './pages/VehicleTracking';
+import OverspeedList from './pages/Reports/OverspeedList';
+import LoginPage from './pages/LoginPage';
 
-const HomePage = lazy(() => import("./pages/DashboardPage"));
-const vehicleTracking = lazy(() => import("./pages/VehicleTracking"));
-//const Register = lazy(() => import("./components/Auth/SignUp"));
+const App: React.FC = () => {
+  return (
+    <Router>
+      <Routes>
+        {/* Public route */}
+        <Route path="/login" element={<LoginPage />} />
 
-//const ErrorPage = lazy(() => import("./components/Shared/Error404"));
+        {/* Protected (layout-wrapped) routes */}
+        <Route path="/" element={<Layout />}>
+          <Route path="login" element={<LoginPage />} />
+          <Route path="dashboard" element={<DashboardPage />} />
+          <Route path="tracking" element={<VehicleTracking />} />
+          <Route path="overspeedList" element={<OverspeedList />} />
+          <Route
+            path="settings"
+            element={<div className="p-8 text-center">Settings (Coming Soon)</div>}
+          />
+        </Route>
 
-function useShouldShowLayout() {
-  const location = useLocation();
-  const pathsWithoutLayout = ["/Login", "/Register"];
-  return !pathsWithoutLayout.includes(location.pathname);
-}
-
-function App() {
-  //onst shouldShowLayout = useShouldShowLayout();
-  // const getToken = useCallback(async () => {
-  //   //const newToken = await fetchToken();
-  //   //localStorage.setItem("token", newToken);
-  // }, []);
-
-  // if (!localStorage.getItem("token")) {
-  //   window.location.reload();
-  //   return <Audio
-  // height="80"
-  //   width = "80"
-  //   radius = "9"
-  //   color = "green"
-  //   ariaLabel = "loading"
-  //   wrapperStyle
-  //   wrapperClass
-  //     />
-  // }
-
-  const publicRoutes = (
-    // <Suspense fallback= {< Loader />}>
-    <Suspense>
-    <Routes>
-
-    <Route path= "/dashboard" Component = { HomePage } />
-      <Route path="/" element = {< Navigate to = "/dashboard" replace />} />
-        < Route path = "/VehicleTracking" Component = { vehicleTracking } />
-        < Route path = "/triphistory" Component = { TripsPage } />
-          <Route path="/alerts" Component = { AlertsPage } />
-          <Route path="/settings" Component = { SettingPage } />
-            </Routes>
-            </Suspense>
+        {/* Catch-all redirect */}
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
+    </Router>
   );
-return (
-  <>
-  <Layout>{ publicRoutes } </Layout>
-  </>
-);
-}
+};
 
 export default App;

@@ -3,46 +3,36 @@ import FleetStatus from "../components/dashboard/FleetStatus";
 import FleetUsage from "../components/dashboard/FleetUsage";
 import FleetIdle from "../components/dashboard/FleetIdle";
 import JobInformation from "../components/dashboard/JobInformation";
-import VehicleStatus from "../components/dashboard/VehicleStatus";
-import FleetFuel from "../components/dashboard/FleetFuel";
-import AlertCardsGroup from "../components/dashboard/AlertCardGroups";
-import OverspeedList from "./Reports/OverspeedList";
+import DashboardCards from "../components/dashboard/DashboardCards";
+// import VehicleStatus from "../components/dashboard/VehicleStatus";
+// import FleetFuel from "../components/dashboard/FleetFuel";
+// import AlertCardsGroup from "../components/dashboard/AlertCardGroups";
+// import OverspeedList from "../components/Reports/OverspeedList";
 
 const DashboardPage: React.FC = () => {
-  return (
-    <div className= "space-y-8 p-4" >
-    {/* Fleet Summary Cards */ }
-    < div className = "grid grid-cols-1 lg:grid-cols-3 gap-4" >
-      <div className="h-full" >
-        <FleetStatus />
-        </div>
-        < div className = "h-full" >
-          <FleetUsage />
-
-          < div className = "flex flex-col gap-4 h-full" >
-            <FleetIdle />
-            < JobInformation />
-
+    return (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* First Row: 3 Equal Columns */}
+            <div className="w-full h-full">
+                <FleetStatus />
             </div>
-            < div className = "mt-6" >
-              <h2 className="text-lg font-semibold text-gray-800 mb-2" > Alerts </h2>
-                < AlertCardsGroup />
-                // <OverspeedList/>
 
-                // {/* Alert Cards Section */}
+            <div className="w-full h-full">
+                <FleetUsage />
+            </div>
 
-                < div className = "p-6 bg-gray-100" >
-                  <FleetFuel />
+            <div className="w-full h-full">
+                <FleetIdle />
+                <div className="mt-2">
+                    <JobInformation />
+                </div>
+            </div>
+            <div className="w-full">
+                <DashboardCards />
+            </div>
 
-
-  {/* Vehicle Status */ }
-  <VehicleStatus />
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-  );
+        </div>
+    );
 };
 
 export default DashboardPage;

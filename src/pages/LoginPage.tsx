@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
-import { LogIn } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from '../components/ui/Card';
 import Button from '../components/ui/Button';
 
-interface LoginPageProps {
-  onLogin: () => void;
-}
-
-const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
+const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,9 +17,9 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
     setError(null);
 
     try {
-      // Temporary validation
       if (email === 'demo@example.com' && password === 'password') {
-        onLogin();
+        // ✅ Navigate to dashboard after successful login
+        navigate('/dashboard');
       } else {
         throw new Error('Invalid credentials. Use demo@example.com / password');
       }
@@ -34,12 +32,10 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
 
   return (
     <div className="min-h-screen bg-blue-600 flex items-center justify-center p-4">
-
       <Card className="w-full max-w-md shadow-xl border border-blue-100">
         <CardContent className="p-8">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold text-blue-900 mt-4">Login</h1>
-          
             <p className="text-xs text-blue-500 mt-2">
               Use <strong>demo@example.com</strong> / <strong>password</strong> to login
             </p>

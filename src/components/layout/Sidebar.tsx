@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { sidebarItems } from '../../config/sidebarConfig';
-import { cn } from '../../utils/cn';
 import { Menu, LogOut, MapPin } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { sidebarItems } from '../../config/sidebarConfig';
+import { cn } from '../../utils/cn';
 
 interface SidebarProps {
   showHamburger?: boolean;
@@ -11,41 +11,39 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
-
   showHamburger = true,
   isCollapsed,
   onToggle,
 }) => {
-const location = useLocation();
-  const path = location.pathname?.split('/')[1] || 'dashboard'; // Default to 'dashboard' if no path
+  const location = useLocation();
+  const path = location.pathname?.split('/')[1] || 'dashboard';
+  const [activeRoute, setActiveRoute] = useState(path);
+  const navigate = useNavigate();
 
-   const [activeRoute, setActiveRoute] = useState(path);
-   const navigate = useNavigate();
-   const handleMenuClick = (route: string) => {
+  const handleMenuClick = (route: string) => {
     setActiveRoute(route);
-    if (isCollapsed) {
-      onToggle(); // Close sidebar if collapsed
-    }
+    if (isCollapsed) onToggle();
     navigate(`/${route}`);
   };
+
   return (
     <aside
       className={`h-screen bg-white fixed top-0 left-0 z-20 shadow-md border-r border-gray-200 transition-all duration-300 flex flex-col justify-between overflow-auto ${
         isCollapsed ? 'w-20' : 'w-64'
       }`}
     >
-      {/* Header */}
       <div>
         <div className="flex items-center justify-between p-4 border-b border-gray-100 overflow-auto">
           <div className="flex items-center gap-2">
-            {!isCollapsed &&<div className="bg-indigo-100 text-indigo-600 p-2 rounded-full">
-              <MapPin size={20} />
-            </div>}
+            {!isCollapsed && (
+              <div className="bg-indigo-100 text-indigo-600 p-2 rounded-full">
+                <MapPin size={20} />
+              </div>
+            )}
             {!isCollapsed && (
               <span className="text-xl font-bold text-indigo-600">FleetTrack</span>
             )}
           </div>
-
           {showHamburger && (
             <button className="text-gray-600" onClick={onToggle} aria-label="Toggle Sidebar">
               <Menu size={22} />
@@ -53,7 +51,6 @@ const location = useLocation();
           )}
         </div>
 
-        {/* Navigation */}
         <nav className="mt-4 px-2 flex flex-col gap-1">
           {sidebarItems.map(({ label, route, icon: Icon }) => (
             <button
@@ -76,16 +73,11 @@ const location = useLocation();
         </nav>
       </div>
 
-      {/* Footer */}
       <div className="p-4 border-t border-gray-100">
         {!isCollapsed ? (
           <>
             <div className="flex items-center gap-3">
-              <img
-                src="/avatar.jpg"
-                alt="Alex Morgan"
-                className="w-9 h-9 rounded-full border"
-              />
+              <img src="/avatar.jpg" alt="Alex Morgan" className="w-9 h-9 rounded-full border" />
               <div className="flex-1">
                 <p className="text-sm font-medium text-gray-800">Alex Morgan</p>
                 <p className="text-xs text-gray-500">admin</p>
@@ -95,17 +87,12 @@ const location = useLocation();
               className="mt-3 flex items-center text-sm text-gray-500 hover:text-indigo-600"
               onClick={() => alert('Logging out')}
             >
-              <LogOut size={16} className="mr-2" />
-              Sign out
+              <LogOut size={16} className="mr-2" /> Sign out
             </button>
           </>
         ) : (
           <div className="flex flex-col items-center">
-            <img
-              src="/avatar.jpg"
-              alt="Alex Morgan"
-              className="w-9 h-9 rounded-full border"
-            />
+            <img src="/avatar.jpg" alt="Alex Morgan" className="w-9 h-9 rounded-full border" />
             <button
               className="mt-2 text-gray-400 hover:text-indigo-600"
               onClick={() => alert('Logging out')}

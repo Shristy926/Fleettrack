@@ -1,6 +1,11 @@
-import { BarChart } from 'lucide-react';
 import React from 'react';
-import { FaCar, FaStopwatch, FaPlay, FaExclamationTriangle, FaArrowUp, FaMapMarkerAlt, FaBan } from 'react-icons/fa';
+import {
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
+} from 'recharts';
+import {
+  FaCar, FaStopwatch, FaPlay, FaExclamationTriangle,
+  FaArrowUp, FaMapMarkerAlt, FaBan
+} from 'react-icons/fa';
 
 interface StatCardProps {
   icon: React.ReactNode;
@@ -21,9 +26,17 @@ const StatCard: React.FC<StatCardProps> = ({ icon, label, value, color }) => {
   );
 };
 
+// ✅ Dummy bar chart data
+const chartData = [
+  { name: 'Vehicle A', idle: 12, running: 30 },
+  { name: 'Vehicle B', idle: 20, running: 50 },
+  { name: 'Vehicle C', idle: 8,  running: 40 },
+  { name: 'Vehicle D', idle: 16, running: 60 },
+];
+
 const VehicleTracking: React.FC = () => {
   return (
-    <div className="bg-[#0f172a] rounded-lg text-white w-full">
+    <div className="bg-[#0f172a] rounded-lg text-white w-full p-6">
       <h2 className="text-2xl font-bold mb-6">VEHICLE TRACKING</h2>
 
       {/* Top Stats */}
@@ -38,8 +51,17 @@ const VehicleTracking: React.FC = () => {
       </div>
 
       {/* Bar Chart Section */}
-      <div className="bg-[#1e293b] p-4 rounded shadow">
-        <BarChart />
+      <div className="bg-[#1e293b] p-4 rounded shadow h-80">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart data={chartData}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+            <XAxis dataKey="name" stroke="#ffffff" />
+            <YAxis stroke="#ffffff" />
+            <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: 'none', color: '#fff' }} />
+            <Bar dataKey="idle" fill="#facc15" name="Idle Time" />
+            <Bar dataKey="running" fill="#38bdf8" name="Running Time" />
+          </BarChart>
+        </ResponsiveContainer>
       </div>
     </div>
   );

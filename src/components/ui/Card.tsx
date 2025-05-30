@@ -1,13 +1,8 @@
-// import React from "react";
+// src/components/ui/Card.tsx
+export const Card = ({ children, className }: any) => (
+  <div className={`bg-white rounded-lg ${className}`}>{children}</div>
+);
 
-// export const Card: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, className = "", ...props }) => (
-//   <div className={`bg-white rounded-lg shadow-md p-6 ${className}`} {...props}>
-//     {children}
-//   </div>
-// );
-
-// export const CardContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ children, className = "", ...props }) => (
-//   <div className={`mt-2 ${className}`} {...props}>
-//     {children}
-//   </div>
-// );
+export const CardContent = ({ children, className }: any) => (
+  <div className={`p-4 ${className}`}>{children}</div>
+);
