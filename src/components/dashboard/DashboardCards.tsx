@@ -6,6 +6,7 @@ import {
   Snowflake,
   Map,
   ThermometerSnowflake,
+  MoveDiagonal,
   Menu,
 } from "lucide-react";
 
@@ -30,37 +31,47 @@ const cards: CardProps[] = [
     bgColor: "bg-red-300",
   },
   {
-    title: "Idle",
-    subtitle: "Max Duration 2h 15m",
-    value: 14,
-    unit: "Vehicles",
-    percentText: "10% fleet",
-    icon: <ThermometerSnowflake className="w-10 h-10 text-white opacity-40" />,
-    bgColor: "bg-yellow-300",
-  },
-  {
-    title: "Geofence",
-    value: 8,
-    unit: "Entries",
-    percentText: "5% events",
+    title: "Fence Overstay",
+    subtitle: "Max Overstay 22 hrs",
+    value: 46,
+    unit: "Alerts",
+    percentText: "10% vehicles",
     icon: <MapPin className="w-10 h-10 text-white opacity-40" />,
-    bgColor: "bg-blue-300",
+    bgColor: "bg-indigo-300",
   },
   {
-    title: "AC Usage",
-    value: "6h 22m",
-    unit: "Today",
-    percentText: "AC On 50%",
+    title: "AC Misuse",
+    subtitle: "Approx Fuel Waste 22 ltr",
+    value: 32,
+    unit: "Hours",
+    percentText: "10% vehicles",
     icon: <Snowflake className="w-10 h-10 text-white opacity-40" />,
     bgColor: "bg-cyan-300",
   },
   {
-    title: "Trip Summary",
-    value: 120,
-    unit: "Trips",
-    percentText: "40 vehicles",
+    title: "Stay Away from Zone",
+    value: 25,
+    unit: "Alerts",
+    percentText: "10% vehicles",
+    icon: <MoveDiagonal className="w-10 h-10 text-white opacity-40" />,
+    bgColor: "bg-yellow-300",
+  },
+  {
+    title: "Stay In Zone",
+    value: 35,
+    unit: "Alerts",
+    percentText: "10% vehicles",
     icon: <Map className="w-10 h-10 text-white opacity-40" />,
     bgColor: "bg-green-300",
+  },
+  {
+    title: "Temperature",
+    subtitle: "Min Temp. 13°C\nMax Temp. 48°C",
+    value: 35,
+    unit: "Alerts",
+    percentText: "10% vehicles",
+    icon: <ThermometerSnowflake className="w-10 h-10 text-white opacity-40" />,
+    bgColor: "bg-sky-300",
   },
 ];
 
@@ -79,57 +90,58 @@ const DashboardCards: React.FC = () => {
 
   return (
     <div className="w-full px-4 py-4">
-      <div className="flex flex-row justify-between flex-wrap gap-4">
-        {cards.map((card, index) => (
+  <div className="flex flex-nowrap gap-1 min-w-fit">
+    {cards.map((card, index) => (
+      <div
+        key={index}
+        className={`relative p-5 rounded-xl shadow-md h-40 text-gray-900 ${card.bgColor}
+          w-[180px] flex-shrink-0`}
+      >
+        {card.title === "Overspeed" && (
           <div
-            key={index}
-            className={`relative p-5 rounded-xl shadow-md h-60 w-[220px] text-gray-900 ${card.bgColor}`}
+            className="absolute top-2 right-2 z-10 cursor-pointer"
+            onClick={toggleDropdown}
           >
-            {card.title === "Overspeed" && (
-              <div
-                className="absolute top-2 right-2 z-10 cursor-pointer"
-                onClick={toggleDropdown}
-              >
-                <Menu className="w-5 h-5 text-white opacity-70" />
-              </div>
-            )}
-
-            {card.title === "Overspeed" && dropdownOpen && (
-              <div className="absolute top-8 right-2 z-20 bg-white rounded shadow-md p-2 w-40 text-black">
-                <button
-                  className="w-full text-left px-2 py-1 hover:bg-gray-100 rounded"
-                  onClick={handleListClick}
-                >
-                  List
-                </button>
-                <button className="w-full text-left px-2 py-1 hover:bg-gray-100 rounded mt-1">
-                  Map
-                </button>
-              </div>
-            )}
-
-            <div className="absolute bottom-4 left-4">{card.icon}</div>
-
-            <h3 className="text-lg font-semibold">{card.title}</h3>
-
-            {card.subtitle && (
-              <p className="text-sm text-red-700 font-medium whitespace-pre-line">
-                {card.subtitle}
-              </p>
-            )}
-
-            <div className="mt-4">
-              <p className="text-4xl font-bold text-red-700">{card.value}</p>
-              <p className="text-sm font-medium">{card.unit}</p>
-            </div>
-
-            <div className="absolute bottom-2 right-2 text-[11px] font-semibold bg-white/30 text-white px-2 py-1 rounded">
-              {card.percentText}
-            </div>
+            <Menu className="w-5 h-5 text-white opacity-70" />
           </div>
-        ))}
+        )}
+
+        {card.title === "Overspeed" && dropdownOpen && (
+          <div className="absolute top-8 right-2 z-20 bg-white rounded shadow-md p-2 w-40 text-black">
+            <button
+              className="w-full text-left px-2 py-1 hover:bg-gray-100 rounded"
+              onClick={handleListClick}
+            >
+              List
+            </button>
+            <button className="w-full text-left px-2 py-1 hover:bg-gray-100 rounded mt-1">
+              Map
+            </button>
+          </div>
+        )}
+
+        <div className="absolute bottom-4 left-4">{card.icon}</div>
+
+        <h3 className="text-lg font-semibold">{card.title}</h3>
+
+        {card.subtitle && (
+          <p className="text-sm text-red-700 font-medium whitespace-pre-line">
+            {card.subtitle}
+          </p>
+        )}
+
+        <div className="mt-4">
+          <p className="text-4xl font-bold text-red-700">{card.value}</p>
+          <p className="text-sm font-medium">{card.unit}</p>
+        </div>
+
+        <div className="absolute bottom-2 right-2 text-[11px] font-semibold bg-white/30 text-white px-2 py-1 rounded">
+          {card.percentText}
+        </div>
       </div>
-    </div>
+    ))}
+  </div>
+</div>
   );
 };
 
