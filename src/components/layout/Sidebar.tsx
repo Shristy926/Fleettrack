@@ -3,6 +3,7 @@ import { Menu, LogOut, MapPin } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { sidebarItems } from '../../config/sidebarConfig';
 import { cn } from '../../utils/cn';
+import UserManagement from '../../pages/UserManagement';
 
 interface SidebarProps {
   showHamburger?: boolean;
@@ -52,57 +53,31 @@ const Sidebar: React.FC<SidebarProps> = ({
         </div>
 
         <nav className="mt-4 px-2 flex flex-col gap-1">
-          {sidebarItems.map(({ label, route, icon: Icon }) => (
-            <button
-              key={route}
-              onClick={() => handleMenuClick(route)}
-              className={cn(
-                'flex items-center p-3 rounded-md text-sm font-medium transition-all',
-                activeRoute === route
-                  ? 'bg-indigo-600 text-white'
-                  : 'text-gray-700 hover:bg-indigo-100',
-                isCollapsed ? 'justify-center' : 'gap-3'
-              )}
-              title={isCollapsed ? label : undefined}
-              aria-label={label}
-            >
-              <Icon size={20} />
-              {!isCollapsed && <span>{label}</span>}
-            </button>
-          ))}
-        </nav>
-      </div>
-
-      <div className="p-4 border-t border-gray-100">
-        {!isCollapsed ? (
-          <>
-            <div className="flex items-center gap-3">
-              <img src="/avatar.jpg" alt="Alex Morgan" className="w-9 h-9 rounded-full border" />
-              <div className="flex-1">
-                <p className="text-sm font-medium text-gray-800">Alex Morgan</p>
-                <p className="text-xs text-gray-500">admin</p>
-              </div>
-            </div>
-            <button
-              className="mt-3 flex items-center text-sm text-gray-500 hover:text-indigo-600"
-              onClick={() => alert('Logging out')}
-            >
-              <LogOut size={16} className="mr-2" /> Sign out
-            </button>
-          </>
-        ) : (
-          <div className="flex flex-col items-center">
-            <img src="/avatar.jpg" alt="Alex Morgan" className="w-9 h-9 rounded-full border" />
-            <button
-              className="mt-2 text-gray-400 hover:text-indigo-600"
-              onClick={() => alert('Logging out')}
-              aria-label="Log out"
-              title="Log out"
-            >
-              <LogOut size={16} />
-            </button>
-          </div>
+  {sidebarItems.map(({ label, route, icon: Icon }) =>
+    label === 'User Management' ? (
+      <UserManagement key={route} isCollapsed={isCollapsed} />
+    ) : (
+      <button
+        key={route}
+        onClick={() => handleMenuClick(route)}
+        className={cn(
+          'flex items-center p-3 rounded-md text-sm font-medium transition-all',
+          activeRoute === route
+            ? 'bg-indigo-600 text-white'
+            : 'text-gray-700 hover:bg-indigo-100',
+          isCollapsed ? 'justify-center' : 'gap-3'
         )}
+        title={isCollapsed ? label : undefined}
+        aria-label={label}
+      >
+        <Icon size={20} />
+        {!isCollapsed && <span>{label}</span>}
+      </button>
+    )
+  )}
+</nav>
+
+
       </div>
     </aside>
   );

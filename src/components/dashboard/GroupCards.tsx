@@ -9,7 +9,7 @@ const distanceData = [
   { name: 'Invalid', value: 500, color: '#9C27B0' },
 ];
 
-const GroupCard = () => {
+const GroupCards = () => {
   return (
     <div className="grid grid-cols-4 gap-4 p-4">
       {/* Maintenance Reminder */}
@@ -102,4 +102,4 @@ const GroupCard = () => {
   );
 };
 
-export default GroupCard;
+export default GroupCards;

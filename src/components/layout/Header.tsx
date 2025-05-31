@@ -3,7 +3,8 @@ import { Menu, Bell, Search } from 'lucide-react';
 import { alerts } from '../../data/mockData';
 
 interface HeaderProps {
-  setIsMobileOpen: (isOpen: boolean) => void;
+  setIsMobileOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isMobileOpen: boolean; // ✅ Add this line
   isSidebarCollapsed: boolean;
 }
 

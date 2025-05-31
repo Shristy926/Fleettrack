@@ -4,32 +4,29 @@ import FleetUsage from "../components/dashboard/FleetUsage";
 import FleetIdle from "../components/dashboard/FleetIdle";
 import JobInformation from "../components/dashboard/JobInformation";
 import DashboardCards from "../components/dashboard/DashboardCards";
-import GroupCard from "../components/dashboard/GroupCard";
+import GroupCards from "../components/dashboard/GroupCards";
 
 const DashboardPage: React.FC = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-6 bg-gray-100 min-h-screen">
-      {/* First Row: 3 Equal Columns */}
-      <div className="w-full h-full">
+    <div className="p-6 bg-gray-100 min-h-screen space-y-4">
+      
+      {/* Top Grid: 3 Columns */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <FleetStatus />
-      </div>
-
-      <div className="w-full h-full">
         <FleetUsage />
-      </div>
-
-      <div className="w-full h-full">
-        <FleetIdle />
-        <div className="mt-2">
+        
+        <div className="space-y-2">
+          <FleetIdle />
           <JobInformation />
         </div>
       </div>
 
-      {/* Full Width Section below the 3-column grid */}
-      <div className="col-span-1 md:col-span-3 space-y-4">
+      {/* Bottom Section: Full Width Cards */}
+      <div className="space-y-4">
         <DashboardCards />
-        <GroupCard />
+        <GroupCards />
       </div>
+      
     </div>
   );
 };
