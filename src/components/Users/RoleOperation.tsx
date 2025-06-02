@@ -11,7 +11,7 @@ const modules = [
   },
   {
     title: 'DriverManagement',
-    permissions: ['DriverManagement'], // ✅ Fixed
+    permissions: ['DriverManagement'],
   },
   {
     title: 'Dashboard',
@@ -22,7 +22,6 @@ const modules = [
     permissions: ['Reports'],
   },
 ];
-
 
 const RoleOperation: React.FC = () => {
   const [selectedPermissions, setSelectedPermissions] = useState<string[]>([]);
@@ -49,34 +48,46 @@ const RoleOperation: React.FC = () => {
 
       {/* Section Header */}
       <div className="bg-gray-200 px-4 py-2 rounded text-purple-600 font-semibold mb-4">
-        MobileApp =&gt; Vehicle
-      </div>
+  {'MobileApp => Vehicle'}
+</div>
 
       {/* Modules and Permissions */}
       <div className="space-y-6">
         {modules.map((mod) => (
-          <div key={mod.title} className="bg-white rounded border shadow-sm">
-            <div className="bg-gray-100 px-4 py-2 font-semibold text-gray-800 border-b">
-              {mod.title}
+          <React.Fragment key={mod.title}>
+            {mod.title === 'DriverManagement' && (
+              <div className="bg-gray-200 px-4 py-2 rounded text-purple-600 font-semibold mb-2">
+  {'WebSite => Vehicle'}
+</div>
+
+            )}
+
+            <div className="bg-white rounded border shadow-sm">
+              <div className="bg-gray-100 px-4 py-2 font-semibold text-gray-800 border-b">
+                {mod.title}
+              </div>
+              <div className="p-4 space-y-2">
+                {mod.permissions.map((perm) => (
+                  <label
+                    key={perm}
+                    className="flex items-center space-x-2 text-gray-800"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={selectedPermissions.includes(perm)}
+                      onChange={() => togglePermission(perm)}
+                      className="w-4 h-4"
+                    />
+                    <span>{perm}</span>
+                  </label>
+                ))}
+              </div>
             </div>
-            <div className="p-4 space-y-2">
-              {mod.permissions.map((perm) => (
-                <label key={perm} className="flex items-center space-x-2 text-gray-800">
-                  <input
-                    type="checkbox"
-                    checked={selectedPermissions.includes(perm)}
-                    onChange={() => togglePermission(perm)}
-                    className="w-4 h-4"
-                  />
-                  <span>{perm}</span>
-                </label>
-              ))}
-            </div>
-          </div>
+          </React.Fragment>
         ))}
       </div>
     </div>
   );
 };
 
-export default RoleOperation
+export default RoleOperation;
