@@ -1,19 +1,17 @@
+// src/pages/AddUser.tsx
+
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-type AddUserModalProps = {
-  isOpen: boolean;
-  onClose: () => void;
-};
-
-const AddUser: React.FC<AddUserModalProps> = ({ isOpen, onClose }) => {
-  if (!isOpen) return null;
+const AddUser: React.FC = () => {
+  const navigate = useNavigate();
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white rounded-lg w-full max-w-2xl p-6 shadow-lg">
         <div className="flex justify-between items-center border-b pb-2 mb-4">
           <h2 className="text-xl font-semibold">Add User</h2>
-          <button onClick={onClose} className="text-gray-600 text-xl">&times;</button>
+          <button onClick={() => navigate(-1)} className="text-gray-600 text-xl">&times;</button>
         </div>
 
         <form className="space-y-4">
@@ -55,10 +53,10 @@ const AddUser: React.FC<AddUserModalProps> = ({ isOpen, onClose }) => {
           <div className="flex justify-end mt-4">
             <button
               type="button"
-              onClick={onClose}
+              onClick={() => navigate(-1)}
               className="bg-red-500 text-white px-4 py-2 rounded mr-2 hover:bg-red-600"
             >
-              Close
+              Cancel
             </button>
             <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
               Save

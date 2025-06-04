@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AddUserModal from "./AddUser";
+import AddUser from "./AddUser";
 
 const User: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
