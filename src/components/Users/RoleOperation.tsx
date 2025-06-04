@@ -1,26 +1,106 @@
 import React, { useState } from 'react';
 
-const modules = [
+type ModuleGroup = {
+  groupTitle: string;
+  modules: {
+    title: string;
+    permissions: string[];
+  }[];
+};
+
+const groupedModules: ModuleGroup[] = [
+  
   {
-    title: 'Live Tracking',
-    permissions: ['Live Tracking'],
+    groupTitle: 'MobileApp => Vehicle',
+    modules: [
+      {
+        title: 'Live Tracking',
+        permissions: ['Live Tracking'],
+      },
+      {
+        title: 'Route',
+        permissions: ['Route'],
+      },
+    ],
   },
   {
-    title: 'Route',
-    permissions: ['Route'],
+    groupTitle: 'WebSite => Vehicle',
+    modules: [
+      {
+        title: 'DriverManagement',
+        permissions: ['DriverManagement'],
+      },
+  
+      {
+        title: 'Dashboard',
+        permissions: ['Dashboard'],
+      },
+      {
+        title: 'Asset Management',
+        permissions: ['Asset Management','Asset'],
+      },
+      {
+        title:'Safe Traverse',
+        permissions: ['Safe Traverse','Route Planning']
+      },
+      {
+        title: 'Maintenance',
+        permissions: ['Maintenance','Schedule Maintenance']
+      },
+      {
+        title: 'Location Services',
+        permissions: ['Location Services', 'Routes','Geofencing','Live Tracking']
+      },
+      {
+        title: 'Vehicle Management',
+        permissions: ['Vehicle Management', 'Vehicle','Trip'],
+      },
+      {
+        title: 'Device Management',
+        permissions: ['Device Management', 'Devices'],
+      },
+      {
+        title: 'Sim Management',
+        permissions: ['Sim Management', 'Sim Cards'],
+      },
+      {
+        title: 'APIs',
+        permissions: ['APIs', 'Keys'],
+      },
+      {
+        title: 'Organization',
+        permissions: ['Organization', 'Information'],
+      },
+    ],
   },
   {
-    title: 'DriverManagement',
-    permissions: ['DriverManagement'],
-  },
-  {
-    title: 'Dashboard',
-    permissions: ['Dashboard'],
-  },
-  {
-    title: 'Reports',
-    permissions: ['Reports'],
-  },
+  groupTitle: 'WebSite => Common',
+  modules: [
+    {
+      title: 'User Management',
+      permissions: [
+        'User Management',      // parent-level access
+        'Role And Operation',   // manage roles and their operations
+        'User'                  // individual user-level actions
+      ],
+    },
+    {
+        title: 'Reports',
+        permissions: [
+          'Reports',
+          'Connection Trend',
+          'Harsh Braking',
+          'Route',
+          'Speeding',
+          'Idle Time',
+          'Trip Summary',
+          'Harsh Cornering',
+          'Harsh Acceleration',
+          'Distance',
+        ],
+      },
+  ],
+}
 ];
 
 const RoleOperation: React.FC = () => {
@@ -28,9 +108,7 @@ const RoleOperation: React.FC = () => {
 
   const togglePermission = (perm: string) => {
     setSelectedPermissions((prev) =>
-      prev.includes(perm)
-        ? prev.filter((p) => p !== perm)
-        : [...prev, perm]
+      prev.includes(perm) ? prev.filter((p) => p !== perm) : [...prev, perm]
     );
   };
 
@@ -46,23 +124,15 @@ const RoleOperation: React.FC = () => {
         </button>
       </div>
 
-      {/* Section Header */}
-      <div className="bg-gray-200 px-4 py-2 rounded text-purple-600 font-semibold mb-4">
-  {'MobileApp => Vehicle'}
-</div>
+      {/* Module Groups */}
+      {groupedModules.map((group) => (
+        <div key={group.groupTitle} className="mb-8">
+          <div className="bg-gray-200 px-4 py-2 rounded text-purple-600 font-semibold mb-4">
+            {group.groupTitle}
+          </div>
 
-      {/* Modules and Permissions */}
-      <div className="space-y-6">
-        {modules.map((mod) => (
-          <React.Fragment key={mod.title}>
-            {mod.title === 'DriverManagement' && (
-              <div className="bg-gray-200 px-4 py-2 rounded text-purple-600 font-semibold mb-2">
-  {'WebSite => Vehicle'}
-</div>
-
-            )}
-
-            <div className="bg-white rounded border shadow-sm">
+          {group.modules.map((mod) => (
+            <div key={mod.title} className="bg-white rounded border shadow-sm mb-4">
               <div className="bg-gray-100 px-4 py-2 font-semibold text-gray-800 border-b">
                 {mod.title}
               </div>
@@ -83,9 +153,9 @@ const RoleOperation: React.FC = () => {
                 ))}
               </div>
             </div>
-          </React.Fragment>
-        ))}
-      </div>
+          ))}
+        </div>
+      ))}
     </div>
   );
 };

@@ -11,6 +11,9 @@ import LoginPage from './pages/LoginPage';
 // User Management
 import UserManagement from './pages/UserManagement';
 import RoleOperation from './components/Users/RoleOperation';
+import User from './components/Users/User';
+import AddUser from './components/Users/AddUser';
+
 
 const App: React.FC = () => {
   return (
@@ -30,6 +33,8 @@ const App: React.FC = () => {
           <Route path="user-management">
             <Route index element={<UserManagement />} />
             <Route path="role-operation" element={<RoleOperation />} />
+            <Route path="user" element={<User />} />
+            <Route path="/add-user" element={<AddUser/>} />
           </Route>
 
           {/* Placeholder Route */}
