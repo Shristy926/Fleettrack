@@ -30,12 +30,15 @@ const App: React.FC = () => {
           <Route path="overspeedList" element={<OverspeedList />} />
 
           {/* Nested User Management Routes */}
-          <Route path="user-management">
-            <Route index element={<UserManagement />} />
-            <Route path="role-operation" element={<RoleOperation />} />
-            <Route path="user" element={<User />} />
-            <Route path="/add-user" element={<AddUser/>} />
-          </Route>
+        <Route path="user-management">
+          <Route index element={<UserManagement />} />
+          <Route path="role-operation" element={<RoleOperation />} />
+          <Route path="user" element={<User />} />
+          <Route path="add-user" element={<AddUser />} />
+          
+ {/* ✅ Fixed */}
+        </Route>
+
 
           {/* Placeholder Route */}
           <Route
