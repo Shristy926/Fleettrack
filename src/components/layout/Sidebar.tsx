@@ -1,9 +1,12 @@
+// src/components/layout/Sidebar.tsx
 import React, { useState } from 'react';
 import { Menu, LogOut, MapPin } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { sidebarItems } from '../../config/sidebarConfig';
 import { cn } from '../../utils/cn';
 import UserManagement from '../../pages/UserManagement';
+import VehicleManagement from '../../pages/VehicleManagement'; // ✅ import this
+import AssetManagement from '../../pages/AssetManagement';
 
 interface SidebarProps {
   showHamburger?: boolean;
@@ -34,7 +37,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       }`}
     >
       <div>
-        <div className="flex items-center justify-between p-4 border-b border-gray-100 overflow-auto">
+        <div className="flex items-center justify-between p-4 border-b border-gray-100">
           <div className="flex items-center gap-2">
             {!isCollapsed && (
               <div className="bg-indigo-100 text-indigo-600 p-2 rounded-full">
@@ -53,31 +56,34 @@ const Sidebar: React.FC<SidebarProps> = ({
         </div>
 
         <nav className="mt-4 px-2 flex flex-col gap-1">
-  {sidebarItems.map(({ label, route, icon: Icon }) =>
-    label === 'User Management' ? (
-      <UserManagement key={route} isCollapsed={isCollapsed} />
-    ) : (
-      <button
-        key={route}
-        onClick={() => handleMenuClick(route)}
-        className={cn(
-          'flex items-center p-3 rounded-md text-sm font-medium transition-all',
-          activeRoute === route
-            ? 'bg-indigo-600 text-white'
-            : 'text-gray-700 hover:bg-indigo-100',
-          isCollapsed ? 'justify-center' : 'gap-3'
-        )}
-        title={isCollapsed ? label : undefined}
-        aria-label={label}
-      >
-        <Icon size={20} />
-        {!isCollapsed && <span>{label}</span>}
-      </button>
-    )
-  )}
-</nav>
+          {sidebarItems.map(({ label, route, icon: Icon }) =>
+  label === 'User Management' ? (
+    <UserManagement key={route} isCollapsed={isCollapsed} />
+  ) : label === 'Vehicle Management' ? (
+    <VehicleManagement key={route} isCollapsed={isCollapsed} />
+  ) : label === 'Asset Management' ? (
+    <AssetManagement key={route} isCollapsed={isCollapsed} />
+  ) : (
+    <button
+      key={route}
+      onClick={() => handleMenuClick(route)}
+      className={cn(
+        'flex items-center p-3 rounded-md text-sm font-medium transition-all',
+        activeRoute === route
+          ? 'bg-indigo-600 text-white'
+          : 'text-gray-700 hover:bg-indigo-100',
+        isCollapsed ? 'justify-center' : 'gap-3'
+      )}
+      title={isCollapsed ? label : undefined}
+      aria-label={label}
+    >
+      <Icon size={20} />
+      {!isCollapsed && <span>{label}</span>}
+    </button>
+  )
+)}
 
-
+        </nav>
       </div>
     </aside>
   );

@@ -1,73 +1,79 @@
-import React from 'react';
-import { Doughnut } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import React from "react";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer,
+} from "recharts";
 import {
   Truck,
   PauseCircle,
   Square,
-  PowerOff,
+  MicOff,
   HelpCircle,
-} from 'lucide-react';
+} from "lucide-react";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+const data = [
+  { name: "Running", value: 90, color: "#22c55e", icon: <Truck size={16} /> },
+  { name: "Idle", value: 10, color: "#facc15", icon: <PauseCircle size={16} /> },
+  { name: "Stopped", value: 50, color: "#ef4444", icon: <Square size={16} /> },
+  { name: "Inactive", value: 20, color: "#3b82f6", icon: <MicOff size={16} /> },
+  { name: "No Data", value: 30, color: "#9ca3af", icon: <HelpCircle size={16} /> },
+];
 
-const FleetStatus = () => {
-  const data = {
-    labels: ['Running', 'Idle', 'Stopped', 'Inactive', 'No Data'],
-    datasets: [
-      {
-        data: [85, 15, 50, 10, 40],
-        backgroundColor: ['#4caf50', '#ffeb3b', '#f44336', '#2196f3', '#9e9e9e'],
-        borderWidth: 1,
-      },
-    ],
-  };
+const totalObjects = 200;
 
-  const legends = [
-    { label: 'Running', color: '#4caf50', icon: <Truck size={16} /> },
-    { label: 'Idle', color: '#ffeb3b', icon: <PauseCircle size={16} /> },
-    { label: 'Stopped', color: '#f44336', icon: <Square size={16} /> },
-    { label: 'Inactive', color: '#2196f3', icon: <PowerOff size={16} /> },
-    { label: 'No Data', color: '#9e9e9e', icon: <HelpCircle size={16} /> },
-  ];
-
+const FleetStatus: React.FC = () => {
   return (
-    <div className="bg-white shadow-md rounded-xl p-4 flex items-center justify-between w-full max-w-md min-h-[350px]">
+    <div className="bg-white rounded-xl shadow-md w-full max-w-md mx-auto p-6 flex flex-col">
+      {/* Title */}
+      <h2 className="text-lg font-semibold text-gray-800 mb-4 text-left">
+        Fleet Status
+      </h2>
 
-      <div className="w-1/2 flex flex-col items-center justify-center">
-  {/* Chart with Title on Top */}
-  <div className="flex flex-col items-center">
-    <h2 className="text-base font-semibold mb-2">Fleet Status</h2>
-    <div className="w-[100px] h-[100px]">
-      <Doughnut
-        data={data}
-        options={{
-          cutout: '70%',
-          plugins: { legend: { display: false } },
-          maintainAspectRatio: false,
-        }}
-      />
-    </div>
-  </div>
+      {/* Donut + Legend side by side always */}
+      <div className="flex flex-row gap-6 items-center justify-start">
+        {/* Donut Chart */}
+        <div className="w-[160px] h-[160px] flex-shrink-0">
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Pie
+  data={data}
+  innerRadius={50}
+  outerRadius={80}
+  dataKey="value"
+  startAngle={90}
+  endAngle={-270}
+>
 
-  {/* Count below chart */}
-  <p className="text-center mt-2 text-xs font-bold">200 Objects</p>
-</div>
+                {data.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.color} />
+                ))}
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
 
+        {/* Legend - locked next to the donut */}
+        <div className="flex flex-col gap-2 text-sm text-left">
+          {data.map((item) => (
+            <div key={item.name} className="flex items-center gap-2 text-gray-800">
+              <span
+                className="w-3 h-3 rounded-full"
+                style={{ backgroundColor: item.color }}
+              ></span>
+              <span>{item.icon}</span>
+              <span className={item.name === "Idle" ? "text-purple-600" : ""}>
+                {item.name}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
 
-      <div className="w-1/2 pl-4 space-y-2">
-        {legends.map((item) => (
-          <div key={item.label} className="flex items-center space-x-2 text-sm">
-            <div
-              className="w-3 h-3 rounded-full"
-              style={{ backgroundColor: item.color }}
-            />
-            <span className="text-gray-600 flex items-center gap-1">
-              {item.icon}
-              {item.label}
-            </span>
-          </div>
-        ))}
+      {/* Total Objects */}
+      <div className="mt-8 text-sm font-semibold text-gray-700 text-center">
+        {totalObjects} Objects
       </div>
     </div>
   );

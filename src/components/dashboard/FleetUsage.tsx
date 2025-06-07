@@ -72,7 +72,7 @@ const FleetUsage = () => {
   };
 
   return (
-    <div className="bg-white p-2 rounded-xl shadow-md w-full max-w-md h-[350px]">
+    <div className="bg-white p-1 rounded-xl shadow-md w-full max-w-md h-[350px]">
   <div className="flex justify-between items-start mb-2">
     <h2 className="text-sm font-semibold text-gray-800">Fleet Usage</h2>
     <div className="text-right text-[10px] text-gray-600 leading-tight">
@@ -80,7 +80,7 @@ const FleetUsage = () => {
       <p>Avg/Vehicle: <span className="text-blue-600 font-medium">129 km</span></p>
     </div>
   </div>
-  <div className="h-[180px]">
+  <div className="h-[300px]">
     <Line data={data} options={options} />
   </div>
 </div>

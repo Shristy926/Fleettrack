@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import Sidebar from '../layout/Sidebar';
 import Header from '../layout/Header';
-import { Outlet } from 'react-router-dom'; // <- Add this
+import { Outlet } from 'react-router-dom';
 
 const Layout: React.FC = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const setIsMobileOpen: React.Dispatch<React.SetStateAction<boolean>> = useState(false)[1];
-
 
   const toggleSidebar = () => {
     setIsSidebarCollapsed(prev => !prev);
@@ -25,7 +24,7 @@ const Layout: React.FC = () => {
           isSidebarCollapsed={isSidebarCollapsed}
         />
         <main className="flex-1 overflow-y-auto bg-gray-50 p-4">
-          <Outlet /> {/* This will render the nested route (e.g., DashboardPage) */}
+          <Outlet />
         </main>
       </div>
     </div>
