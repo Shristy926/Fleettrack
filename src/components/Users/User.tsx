@@ -71,16 +71,16 @@ const User: React.FC = () => {
         >
           Add
         </button>
-        <button className="bg-yellow-500 text-white font-bold py-2 px-4 rounded hover:bg-yellow-600 transition">
+        <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-yellow-600 transition">
           Edit
         </button>
-        <button className="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600 transition">
+        <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600 transition">
           Deactivate
         </button>
-        <button className="bg-green-600 text-white font-bold py-2 px-4 rounded hover:bg-green-700 transition">
+        <button className="bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-green-700 transition">
           Activate
         </button>
-        <button className="bg-purple-600 text-white font-bold py-2 px-4 rounded hover:bg-purple-700 transition">
+        <button className="bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-purple-700 transition">
           Reset Password
         </button>
       </div>
