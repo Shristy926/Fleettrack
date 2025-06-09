@@ -9,7 +9,6 @@ type ModuleGroup = {
 };
 
 const groupedModules: ModuleGroup[] = [
-  
   {
     groupTitle: 'MobileApp => Vehicle',
     modules: [
@@ -30,30 +29,29 @@ const groupedModules: ModuleGroup[] = [
         title: 'DriverManagement',
         permissions: ['DriverManagement'],
       },
-  
       {
         title: 'Dashboard',
         permissions: ['Dashboard'],
       },
       {
         title: 'Asset Management',
-        permissions: ['Asset Management','Asset'],
+        permissions: ['Asset Management', 'Asset'],
       },
       {
-        title:'Safe Traverse',
-        permissions: ['Safe Traverse','Route Planning']
+        title: 'Safe Traverse',
+        permissions: ['Safe Traverse', 'Route Planning'],
       },
       {
         title: 'Maintenance',
-        permissions: ['Maintenance','Schedule Maintenance']
+        permissions: ['Maintenance', 'Schedule Maintenance'],
       },
       {
         title: 'Location Services',
-        permissions: ['Location Services', 'Routes','Geofencing','Live Tracking']
+        permissions: ['Location Services', 'Routes', 'Geofencing', 'Live Tracking'],
       },
       {
         title: 'Vehicle Management',
-        permissions: ['Vehicle Management', 'Vehicle','Trip'],
+        permissions: ['Vehicle Management', 'Vehicle', 'Trip'],
       },
       {
         title: 'Device Management',
@@ -74,17 +72,13 @@ const groupedModules: ModuleGroup[] = [
     ],
   },
   {
-  groupTitle: 'WebSite => Common',
-  modules: [
-    {
-      title: 'User Management',
-      permissions: [
-        'User Management',      // parent-level access
-        'Role And Operation',   // manage roles and their operations
-        'User'                  // individual user-level actions
-      ],
-    },
-    {
+    groupTitle: 'WebSite => Common',
+    modules: [
+      {
+        title: 'User Management',
+        permissions: ['User Management', 'Role And Operation', 'User'],
+      },
+      {
         title: 'Reports',
         permissions: [
           'Reports',
@@ -99,8 +93,8 @@ const groupedModules: ModuleGroup[] = [
           'Distance',
         ],
       },
-  ],
-}
+    ],
+  },
 ];
 
 const RoleOperation: React.FC = () => {
@@ -126,34 +120,37 @@ const RoleOperation: React.FC = () => {
 
       {/* Module Groups */}
       {groupedModules.map((group) => (
-        <div key={group.groupTitle} className="mb-8">
+        <div key={group.groupTitle} className="mb-10">
           <div className="bg-gray-200 px-4 py-2 rounded text-purple-600 font-semibold mb-4">
             {group.groupTitle}
           </div>
 
-          {group.modules.map((mod) => (
-            <div key={mod.title} className="bg-white rounded border shadow-sm mb-4">
-              <div className="bg-gray-100 px-4 py-2 font-semibold text-gray-800 border-b">
-                {mod.title}
+          {/* Grid of Modules (2 per row on medium+, 1 per row on mobile) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {group.modules.map((mod) => (
+              <div key={mod.title} className="bg-white rounded border shadow-sm">
+                <div className="bg-gray-100 px-4 py-2 font-semibold text-gray-800 border-b">
+                  {mod.title}
+                </div>
+                <div className="p-4 grid grid-cols-1 gap-2">
+                  {mod.permissions.map((perm) => (
+                    <label
+                      key={perm}
+                      className="flex items-center space-x-2 text-sm text-gray-800"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={selectedPermissions.includes(perm)}
+                        onChange={() => togglePermission(perm)}
+                        className="w-4 h-4"
+                      />
+                      <span>{perm}</span>
+                    </label>
+                  ))}
+                </div>
               </div>
-              <div className="p-4 space-y-2">
-                {mod.permissions.map((perm) => (
-                  <label
-                    key={perm}
-                    className="flex items-center space-x-2 text-gray-800"
-                  >
-                    <input
-                      type="checkbox"
-                      checked={selectedPermissions.includes(perm)}
-                      onChange={() => togglePermission(perm)}
-                      className="w-4 h-4"
-                    />
-                    <span>{perm}</span>
-                  </label>
-                ))}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       ))}
     </div>
