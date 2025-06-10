@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 // Layout & Pages
-import Layout from './components/layout/Layout';
+import Layout from './layout/Layout';
 import DashboardPage from './pages/DashboardPage';
 import VehicleTracking from './pages/VehicleTracking';
 import OverspeedList from './pages/Reports/OverspeedList';

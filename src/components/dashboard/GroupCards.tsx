@@ -11,7 +11,7 @@ const distanceData = [
 
 const GroupCards = () => {
   return (
-    <div className="grid grid-cols-4 gap-4 p-4">
+    <div className="grid grid-cols-4 gap-2">
       {/* Maintenance Reminder */}
       <div className="bg-white p-4 rounded shadow w-full">
         <h3 className="text-sm font-semibold mb-2">Maintenance Reminder</h3>

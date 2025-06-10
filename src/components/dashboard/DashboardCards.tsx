@@ -89,7 +89,7 @@ const DashboardCards: React.FC = () => {
   };
 
   return (
-    <div className="w-full px-4 py-4">
+    <div className="w-full gap-4 py-4">
   <div className="flex flex-nowrap gap-1 min-w-fit">
     {cards.map((card, index) => (
       <div

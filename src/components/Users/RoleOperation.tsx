@@ -107,7 +107,7 @@ const RoleOperation: React.FC = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
+    <div className="bg-gray-100 min-h-screen">
       {/* Header Buttons */}
       <div className="flex items-center justify-start gap-4 mb-6">
         <button className="bg-gray-700 text-white px-4 py-2 rounded shadow hover:bg-gray-800">
