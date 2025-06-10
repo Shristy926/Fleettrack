@@ -2,7 +2,8 @@ import React from 'react';
 import { Calendar, Download, Filter } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/Card';
 import Button from '../components/ui/Button';
-import { trips } from '../data/mockData';
+import { trips } from '../../../data/mockData';
+// import { trips } from '../data/mockData';
 
 const TripsPage: React.FC = () => {
   const formatDate = (dateString: string) => {

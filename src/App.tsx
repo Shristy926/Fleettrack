@@ -1,20 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-
-// Layout & Pages
-import Layout from './layout/Layout';
-import DashboardPage from './pages/DashboardPage';
-import VehicleTracking from './pages/VehicleTracking';
-import OverspeedList from './pages/Reports/OverspeedList';
-import LoginPage from './pages/LoginPage';
-
-// User Management
-import UserManagement from './pages/UserManagement';
-import RoleOperation from './components/Users/RoleOperation';
-import User from './components/Users/User';
-import AddUser from './components/Users/AddUser';
-import EditUser from './components/Users/EditUser';
-import VehicleManagement from './pages/VehicleManagement';
+import LoginPage from './features/users/pages/LoginPage';
+import { Layout, User } from 'lucide-react';
+import DashboardPage from './features/users/pages/DashboardPage';
+import VehicleTracking from './features/users/pages/VehicleTracking';
+import OverspeedList from './features/users/pages/Reports/OverspeedList';
+import UserManagement from './features/users/pages/UserManagement';
+import RoleOperation from './features/users/RoleOperation';
+import AddUser from './features/users/AddUser';
+import EditUser from './features/users/EditUser';
+import VehicleManagement from './features/users/pages/VehicleManagement';
 
 
 const App: React.FC = () => {

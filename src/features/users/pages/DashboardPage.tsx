@@ -1,10 +1,16 @@
 import React from "react";
-import FleetStatus from "../components/dashboard/FleetStatus";
 import FleetUsage from "../components/dashboard/FleetUsage";
+import FleetStatus from "../components/dashboard/FleetStatus";
 import FleetIdle from "../components/dashboard/FleetIdle";
 import JobInformation from "../components/dashboard/JobInformation";
 import DashboardCards from "../components/dashboard/DashboardCards";
 import GroupCards from "../components/dashboard/GroupCards";
+// import FleetStatus from "../components/dashboard/FleetStatus";
+// import FleetUsage from "../components/dashboard/FleetUsage";
+// import FleetIdle from "../components/dashboard/FleetIdle";
+// import JobInformation from "../components/dashboard/JobInformation";
+// import DashboardCards from "../components/dashboard/DashboardCards";
+// import GroupCards from "../components/dashboard/GroupCards";
 
 const DashboardPage: React.FC = () => {
   return (

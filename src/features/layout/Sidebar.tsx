@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Menu, MapPin } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { sidebarItems } from "../Config/sidebarConfig";
-import { cn } from "../utils/cn";
+import { sidebarItems } from '../../Config/sidebarConfig';
+import { cn } from '../../Utils/cn';
+// import { sidebarItems } from "../Config/sidebarConfig";
+// import { cn } from "../utils/cn";
 
 interface SidebarProps {
   showHamburger?: boolean;
