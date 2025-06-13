@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 
 const Layout: React.FC = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-  const setIsMobileOpen: React.Dispatch<React.SetStateAction<boolean>> = useState(false)[1];
+  const [isMobileOpen, setIsMobileOpen] = useState(false);  // ✅ direct useState
 
   const toggleSidebar = () => {
     setIsSidebarCollapsed(prev => !prev);

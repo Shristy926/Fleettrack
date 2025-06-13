@@ -3,8 +3,8 @@ import { Menu, MapPin } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { sidebarItems } from '../../Config/sidebarConfig';
 import { cn } from '../../Utils/cn';
-// import { sidebarItems } from "../Config/sidebarConfig";
-// import { cn } from "../utils/cn";
+import UserManagement from '../users/pages/UserManagement';
+import VehicleManagement from '../users/pages/VehicleManagement';
 
 interface SidebarProps {
   showHamburger?: boolean;
@@ -34,7 +34,6 @@ const Sidebar: React.FC<SidebarProps> = ({
         isCollapsed ? 'w-20' : 'w-64'
       }`}
     >
-      {/* Logo and toggle */}
       <div>
         <div className="flex items-center justify-between p-4 border-b border-gray-100">
           <div className="flex items-center gap-2">
@@ -58,6 +57,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
         {/* Sidebar menu */}
         <nav className="mt-4 px-2 flex flex-col gap-1">
+          {/* Existing static menu items */}
           {sidebarItems.map(({ label, route, icon: Icon }) => (
             <button
               key={route}
@@ -76,6 +76,14 @@ const Sidebar: React.FC<SidebarProps> = ({
               {!isCollapsed && <span>{label}</span>}
             </button>
           ))}
+
+          {/* ✅ Add your dropdown menus here */}
+          {!isCollapsed && (
+            <>
+              <UserManagement />
+              <VehicleManagement/>
+            </>
+          )}
         </nav>
       </div>
     </aside>
