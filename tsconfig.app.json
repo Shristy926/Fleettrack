@@ -20,5 +20,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "src/components/dashboard/FleetFuel.tsx"]
+  "include": ["src", "src/components/dashboard/FleetFuel.tsx", "src/features/Services/api.tsx"]
 }
